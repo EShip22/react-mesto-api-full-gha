@@ -135,7 +135,6 @@ class Api {
 
 	register(formValues) {
 		return fetch(`${api._baseUrl}/signup`, {
-			mode: 'no-cors',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -152,7 +151,6 @@ class Api {
 
 	authorization(formValues) {
 		return fetch(`${api._baseUrl}/signin`, {
-			mode: 'no-cors',
 			method: 'POST',
 			headers : {
 				'Content-Type': 'application/json'
