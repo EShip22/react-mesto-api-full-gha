@@ -135,6 +135,7 @@ class Api {
 
 	register(formValues) {
 		return fetch(`${api._baseUrl}/signup`, {
+			mode: 'no-cors',
 			method: 'POST',
 			headers: {
 				'Access-Control-Allow-Origin': '*',
@@ -152,6 +153,7 @@ class Api {
 
 	authorization(formValues) {
 		return fetch(`${api._baseUrl}/signin`, {
+			mode: 'no-cors',
 			method: 'POST',
 			headers : {
 				'Access-Control-Allow-Origin': '*',
