@@ -39,5 +39,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log('Ссылка на сервер1');
+  console.log('Ссылка на сервер');
 });
