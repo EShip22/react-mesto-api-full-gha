@@ -10,6 +10,6 @@
 
 IP-адрес x.x.x.x
 
-Frontend https://...
+Frontend https://osetr22.students.nomoredomains.work
 
-Backend https://...
+Backend https://api.osetr22.students.nomoredomains.work
