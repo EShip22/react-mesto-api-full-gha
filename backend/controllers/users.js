@@ -81,7 +81,6 @@ module.exports.updateUser = (req, res, next) => {
       if (!resUser) {
         throw new NotFoundError('Пользователь не найден');
       } else {
-        //  console.log(resUser);
         res.status(200).send(resUser);
       }
     })
@@ -115,25 +114,6 @@ module.exports.updateAvatar = (req, res, next) => {
     });
 };
 
-/*  module.exports.login = (req, res, next) => {
-  console.log(111);
-  const { email, password } = req.body;
-  user.findOne({ email }).select('+password')
-    .then((finduser) => {
-      if (!finduser) {
-        throw new IncorrectEmailPasswordError('Пользователь не найден');
-      }
-      // пользователь найден
-      if (bcrypt.compare(password, finduser.password)) {
-        const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
-        res.status(200).send({ _id });
-      } else {
-        throw new IncorrectEmailPasswordError('Неверные email или пароль');
-      }
-    })
-    .catch(next);
-};  */
-
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   user.findOne({ email }).select('+password')
@@ -146,7 +126,9 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new IncorrectEmailPasswordError('Неверные email или пароль');
           } else {
-            const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
+            const { NODE_ENV, JWT_SECRET } = process.env;
+            //  const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
+            const _id = jwt.sign({ _id: finduser._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
             res.status(200).send({ _id });
           }
         });
