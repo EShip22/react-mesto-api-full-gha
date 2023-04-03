@@ -134,9 +134,11 @@ class Api {
 	}
 
 	register(formValues) {
+		console.log(1222);
 		return fetch(`${api._baseUrl}/signup`, {
+			//mode: 'cors',
 			method: 'POST',
-			headers : {
+			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
@@ -147,6 +149,7 @@ class Api {
 			.then(res => {
 				return this._getResponseData(res);
 			})
+			.catch(err => console.log(err));
 	}
 
 	authorization(formValues) {
@@ -183,7 +186,8 @@ class Api {
 export const api = new Api({
 	//	baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-54',
 	//	baseUrlforAuth: 'https://auth.nomoreparties.co',
-		baseUrl: 'http://localhost:3001',
+		//baseUrl: 'http://localhost:3001',
+		baseUrl: 'http://api.osetr22.students.nomoredomains.work',
 	//	baseUrlforAuth: 'http://localhost:3001',
 	/*headers: {
 		//	authorization: 'ddf428a7-16b6-4724-b90f-7c16ff158dcf',
