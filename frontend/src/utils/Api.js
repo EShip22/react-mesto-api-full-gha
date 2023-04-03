@@ -136,7 +136,8 @@ class Api {
 	register(formValues) {
 		console.log(1222);
 		return fetch(`${api._baseUrl}/signup`, {
-			//mode: 'cors',
+			mode: 'cors',
+			'Access-Control-Allow-Origin': 'http://osetr22.students.nomoredomains.work',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
