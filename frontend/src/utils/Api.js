@@ -137,7 +137,8 @@ class Api {
 		return fetch(`${api._baseUrl}/signup`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				password: formValues?.password ?? '',
@@ -153,6 +154,7 @@ class Api {
 		return fetch(`${api._baseUrl}/signin`, {
 			method: 'POST',
 			headers : {
+				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
