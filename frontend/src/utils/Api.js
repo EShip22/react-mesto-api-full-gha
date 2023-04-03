@@ -185,5 +185,6 @@ class Api {
 }
 
 export const api = new Api({
-		baseUrl: 'http://api.osetr22.students.nomoredomains.work',
+		//	baseUrl: 'http://api.osetr22.students.nomoredomains.work', ТУТ ПРОБЛЕМА CORS
+		baseUrl: 'http://localhost:3000'
 });

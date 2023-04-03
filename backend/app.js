@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 //  const cors = require('cors');
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 const app = express();
 //  app.use(cors());
 const bodyParser = require('body-parser');
