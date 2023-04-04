@@ -126,10 +126,9 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new IncorrectEmailPasswordError('Неверные email или пароль');
           } else {
-            //  const { NODE_ENV, JWT_SECRET } = process.env;
-            const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
-            //  const _id = jwt.sign({ _id: finduser._id }, NODE_ENV ===
-            //  'production' ? JWT_SECRET : 'dev-secret');
+            const { NODE_ENV, JWT_SECRET } = process.env;
+            //  const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
+            const _id = jwt.sign({ _id: finduser._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
             res.status(200).send({ _id });
           }
         });
