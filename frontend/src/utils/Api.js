@@ -185,6 +185,6 @@ class Api {
 }
 
 export const api = new Api({
-		baseUrl: 'http://api.osetr22.students.nomoredomains.work'
-		//	baseUrl: 'http://localhost:3000'
+		//	baseUrl: 'http://api.osetr22.students.nomoredomains.work'
+			baseUrl: 'http://localhost:3001'
 });
