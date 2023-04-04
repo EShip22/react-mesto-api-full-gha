@@ -23,6 +23,13 @@ app.use(requestLogger);
 
 app.use('/users', users);
 app.use('/cards', cards);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signup', users);
 app.post('/signin', users);
 
