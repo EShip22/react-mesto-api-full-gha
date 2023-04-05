@@ -38,14 +38,6 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
 
-  user.findOne({ email })
-    .then((finduser) => {
-      if (finduser) {
-        throw new AlreadyExistsEmailError('Пользователь с данным email уже зарегистрирован');
-      }
-    })
-    .catch(next);
-
   bcrypt.hash(password, 10)
     .then((hash) => user.create({
       name,
@@ -64,6 +56,10 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.toString().indexOf('ValidationError') >= 0) {
         next(new ValidationError('Ошибка валидации'));
+        return;
+      }
+      if (err.code === 11000) {
+        next(new AlreadyExistsEmailError('Ошибка валидации'));
         return;
       }
       next(err);
@@ -127,9 +123,12 @@ module.exports.login = (req, res, next) => {
             throw new IncorrectEmailPasswordError('Неверные email или пароль');
           } else {
             const { NODE_ENV, JWT_SECRET } = process.env;
-            //  const _id = jwt.sign({ _id: finduser._id }, 'some-secret-key', { expiresIn: '7d' });
-            const _id = jwt.sign({ _id: finduser._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
-            res.status(200).send({ _id });
+            try {
+              const _id = jwt.sign({ _id: finduser._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
+              res.status(200).send({ _id });
+            } catch (err) {
+              throw new IncorrectEmailPasswordError();
+            }
           }
         });
     })
